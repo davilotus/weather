@@ -1,0 +1,150 @@
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+
+  &::before {
+    top: 0;
+    z-index: 1;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.16);
+    position: absolute;
+  }
+}
+
+.result {
+  margin: 20px 0;
+
+  width: 100%;
+  backdrop-filter: blur(15px);
+  background-color: rgba(255, 255, 255, 0.16);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+form {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+  gap: 10px;
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.07);
+
+  input {
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    border-radius: 8px;
+    padding: 14px 18px;
+    outline: none;
+
+    &[type='search'] {
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: white;
+      box-shadow: 0 0 7px 0 rgba(255, 255, 255, 0.35);
+      width: 220px;
+    }
+
+    &[type='submit'] {
+      border: 1px solid #068fff;
+      background: #068fff;
+      color: white;
+      cursor: pointer;
+      padding: 14px;
+
+      &:hover {
+        background: darken(#068fff, 15%);
+        border-color: darken(#068fff, 15%);
+      }
+    }
+  }
+
+  span {
+    color: red;
+    position: absolute;
+    z-index: 2;
+    font-size: 11px;
+    bottom: 21px;
+    left: 37px;
+  }
+
+  &::before {
+    top: 0;
+    z-index: 1;
+    content: '';
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(15px);
+    background-color: rgba(255, 255, 255, 0.16);
+    position: absolute;
+  }
+
+  @media (min-width: 600px) {
+    input {
+      &[type='search'] {
+        width: 300px;
+      }
+
+      &[type='submit'] {
+        padding: 14px 18px;
+      }
+    }
+  }
+}
+
+.info {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+p {
+  color: white;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+  text-align: center;
+
+  &.name {
+    font-size: 2.5rem; // 40px
+  }
+
+  &.temperature {
+    font-size: 4.375rem; // 80px
+    font-weight: 700;
+  }
+
+  @media (min-width: 600px) {
+    &.temperature {
+      font-size: 5rem; // 80px
+    }
+  }
+}
+
+.condition {
+  margin: 0 auto;
+  display: table;
+}
