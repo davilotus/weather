@@ -1,5 +1,4 @@
 import { createClient } from 'pexels';
-import { PhotosPaged } from '../types/photosPaged.types';
 import { selectRandomPhoto } from '../utils/selectRandomPhoto';
 
 export const getImage = async (query: string) => {
@@ -7,7 +6,7 @@ export const getImage = async (query: string) => {
 
   const result = await client.photos
     .search({ query, per_page: 15, orientation: 'landscape' })
-    .then((photos: PhotosPaged) => {
+    .then((photos) => {
       const photo = photos && selectRandomPhoto(photos.photos);
 
       return photo.src.landscape.replace('&h=627&w=1200', '&w=1920');
