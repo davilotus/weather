@@ -1,8 +1,10 @@
 import { PhotoProps } from '../types/photo.type';
 
-export const selectRandomPhoto = (arr: PhotoProps[]) => {
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  const item = arr[randomIndex];
+export const selectRandomPhoto = (array: PhotoProps[]) => {
+  const objectArray = Object.keys(array);
+  const randomIndex = Math.floor(Math.random() * objectArray.length);
+  const selectedItem = array[randomIndex];
 
-  return item;
+  const imageUrl = selectedItem.src.landscape;
+  return imageUrl.replace('&h=627&w=1200', '&w=1920');
 };

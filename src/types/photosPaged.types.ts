@@ -5,4 +5,5 @@ export interface PhotosPaged {
   page: number;
   per_page: number;
   photos: PhotoProps[];
+  total_results: number;
 }

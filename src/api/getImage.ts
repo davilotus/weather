@@ -1,20 +1,25 @@
-import { createClient } from 'pexels';
-import { selectRandomPhoto } from '../utils/selectRandomPhoto';
+import { PhotosProps } from '../types/photos.types';
 
-export const getImage = async (query: string) => {
-  const client = createClient(import.meta.env.VITE_PEXELS_APIKEY);
+export const getImage = async (query: string): Promise<PhotosProps[]> => {
+  const pexelsKeys = import.meta.env.VITE_PEXELS_APIKEY;
 
-  const result = await client.photos
-    .search({ query, per_page: 15, orientation: 'landscape' })
-    .then((photos) => {
-      const photo = photos && selectRandomPhoto(photos.photos);
+  const headers = new Headers({ Authorization: pexelsKeys });
 
-      return photo.src.landscape.replace('&h=627&w=1200', '&w=1920');
+  const options = {
+    headers: headers,
+  };
+
+  const result = await fetch(
+    `https://api.pexels.com/v1/search?query=${query}&per_page=15&orientation=landscape`,
+    options
+  )
+    .then((response) => {
+      const data = response.json();
+      return data;
     })
-    .catch((error) => {
-      console.log(error);
-      return `Erro: ${error}`;
+    .then((data) => {
+      return data.photos;
     });
 
-  return result;
+  return [{ photos: result }];
 };

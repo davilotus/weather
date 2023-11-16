@@ -8,6 +8,7 @@ import backgroundDefault from './assets/img/bluesky.jpg';
 
 import './App.scss';
 import { getWeather } from './api/getWeather';
+import { selectRandomPhoto } from './utils/selectRandomPhoto';
 
 function App() {
   const [weather, setWeather] = useState<WeatherProps | null>();
@@ -28,7 +29,8 @@ function App() {
 
     setWeather(response);
 
-    const photo = await getImage(`${search}`);
+    const photos = await getImage(`${search}`);
+    const photo = photos && selectRandomPhoto(photos[0].photos);
     photo && setBackgroundImage(photo);
   };
 
